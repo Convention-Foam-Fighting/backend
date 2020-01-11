@@ -1,6 +1,15 @@
 {
-  "gmail": {
-    "user": "",
-    "pass": ""
+  "smtp": {
+    "host": "localhost",
+    "port": "25",
+    "secure": false,
+    "authOptional": true,
+    "tls": {
+      "rejectUnauthorized": false
+    },
+    "auth": {
+      "user": "info@conventionfoamfighting.com",
+      "pass": ""
+    }
   }
 }
