@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const https = require('https');
 const waivers = require('./lib/waivers');
 const app = express();
-const port = process.env.PORT || config.get('port') || 1337;
+const port = process.env.PORT || config.get('port');
 
 app.options('*', cors());
 
@@ -25,8 +25,8 @@ app.get('/waivers/check', waivers.check);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
-if (config.get('server')) {
-  const certPath = config.get('server.certPath');
+if (config.get('certPath')) {
+  const certPath = config.get('certPath');
   const certs = {
     key: fs.readFileSync(`${certPath}/privkey.pem`),
     cert: fs.readFileSync(`${certPath}/cert.pem`),

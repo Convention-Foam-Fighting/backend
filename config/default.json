@@ -1,4 +1,6 @@
 {
+  "certPath": "",
+  "port": 1337,
   "smtp": {
     "host": "localhost",
     "port": "25",
