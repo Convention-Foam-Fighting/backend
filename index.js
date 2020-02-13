@@ -1,10 +1,12 @@
+const fs = require('fs');
+const config = require('config');
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
-const sanitizer = require('express-sanitizer');
+const https = require('https');
 const waivers = require('./lib/waivers');
 const app = express();
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || config.get('port') || 1337;
 
 app.options('*', cors());
 
@@ -23,4 +25,16 @@ app.get('/waivers/check', waivers.check);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+if (config.get('server')) {
+  const certPath = config.get('server.certPath');
+  const certs = {
+    key: fs.readFileSync(`${certPath}/privkey.pem`),
+    cert: fs.readFileSync(`${certPath}/cert.pem`),
+    ca: fs.readFileSync(`${certPath}/chain.pem`)
+  };
+
+  const server = https.createServer(certs, app);
+  server.listen(port, () => console.log(`Listening on port ${port}`));
+} else {
+  app.listen(port, () => console.log(`Listening on port ${port}`));
+}
