@@ -14,7 +14,7 @@ app.use(
   express.urlencoded({extended: true}),
   express.json(),
   helmet(),
-  cors()
+  cors({ origin: '*' })
 );
 
 app.get('/ok', (req, res) => res.sendStatus(200));
@@ -22,6 +22,7 @@ app.get('/ok', (req, res) => res.sendStatus(200));
 app.get('/waivers', waivers.fetchAll);
 app.post('/waivers', waivers.create);
 app.get('/waivers/check', waivers.check);
+app.get('/waivers/count', waivers.count);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
