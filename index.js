@@ -20,7 +20,6 @@ app.use(
 
 app.get('/ok', (req, res) => res.sendStatus(200));
 
-app.post('/checkin', checkin.count);
 app.get('/checkin', checkin.totals);
 
 app.get('/waivers', waivers.fetchAll);
