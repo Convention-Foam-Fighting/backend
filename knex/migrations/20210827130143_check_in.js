@@ -2,7 +2,7 @@ exports.up = knex =>
   knex.schema
     .createTable('checkin', table => {
       table.increments('checkin_id').primary();
-      table.integer('wavier_id');
+      table.integer('waiver_id');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     });
 
