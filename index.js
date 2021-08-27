@@ -8,7 +8,7 @@ const waivers = require('./lib/waivers');
 const app = express();
 const port = process.env.PORT || config.get('port');
 
-app.options('*', cors());
+app.options('*', cors({ origin: '*' }));
 
 app.use(
   express.urlencoded({extended: true}),
