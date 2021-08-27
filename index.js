@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const https = require('https');
+const checkin = require('./lib/checkin');
 const waivers = require('./lib/waivers');
 const app = express();
 const port = process.env.PORT || config.get('port');
@@ -19,10 +20,12 @@ app.use(
 
 app.get('/ok', (req, res) => res.sendStatus(200));
 
+app.post('/checkin', checkin.count);
+app.get('/checkin', checkin.totals);
+
 app.get('/waivers', waivers.fetchAll);
 app.post('/waivers', waivers.create);
 app.get('/waivers/check', waivers.check);
-app.get('/waivers/count', waivers.count);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
