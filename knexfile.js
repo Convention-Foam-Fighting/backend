@@ -5,6 +5,7 @@ module.exports = {
   client: 'sqlite3',
   connection: {
     filename: './cff.db',
+    timezone: 'gmt-5'
   },
   migrations: {
     directory: './knex/migrations',
