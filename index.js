@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const https = require('https');
+const compression = require('compression');
 const checkin = require('./lib/checkin');
 const waivers = require('./lib/waivers');
 const waiversV2 = require('./lib/v2/waivers');
@@ -16,7 +17,8 @@ app.use(
   express.urlencoded({extended: true}),
   express.json(),
   helmet(),
-  cors({ origin: '*' })
+  cors({ origin: '*' }),
+  compression()
 );
 
 app.get('/ok', (req, res) => res.sendStatus(200));
