@@ -21,6 +21,21 @@ app.use(
   compression()
 );
 
+app.use((req, res, next) => {
+  const timestamp = new Date().toISOString();
+  const method = req.method;
+  const url = req.url;
+  const query = JSON.stringify(req.query);
+  const body = JSON.stringify(req.body);
+
+  console.log(`[${timestamp}] ${method} ${url}`);
+  console.log(`Query: ${query}`);
+  console.log(`Body: ${body}`);
+  console.log('---');
+
+  next();
+});
+
 app.get('/ok', (req, res) => res.sendStatus(200));
 
 app.get('/checkin', checkin.totals);
@@ -29,8 +44,9 @@ app.get('/waivers', waivers.fetchAll);
 app.post('/waivers', waivers.create);
 app.get('/waivers/check', waivers.check);
 
-app.post('/v2/waivers', waiversV2.create);
-app.get('/v2/waivers/check', waiversV2.check);
+app.get('/api/waivers', waiversV2.fetchAll);
+app.post('/api/waivers', waiversV2.create);
+app.get('/api/waivers/check', waiversV2.check);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
