@@ -52,7 +52,9 @@ app.post('/waivers', waivers.create);
 app.get('/waivers/check', waivers.check);
 
 app.get('/api/waivers', waiversV2.fetchAll);
+app.post('/api/waivers/count', waiversV2.count);
 app.post('/api/waivers', waiversV2.create);
+app.post('/api/waivers/totals', waiversV2.totals);
 app.get('/api/waivers/check', waiversV2.check);
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
