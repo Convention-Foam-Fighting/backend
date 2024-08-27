@@ -17,7 +17,14 @@ app.use(
   express.urlencoded({extended: true}),
   express.json(),
   helmet(),
-  cors({ origin: '*' }),
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+    allowedHeaders: '*'
+  }),
   compression()
 );
 
