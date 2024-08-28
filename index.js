@@ -7,9 +7,11 @@ const https = require('https');
 const compression = require('compression');
 const checkin = require('./lib/checkin');
 const waivers = require('./lib/waivers');
-const waiversV2 = require('./lib/v2/waivers');
 const app = express();
 const port = process.env.PORT || config.get('port');
+
+const EventsRouter = require('./lib/v2/events');
+const WaiversRouter = require('./lib/v2/waivers');
 
 app.options('*', cors({ origin: '*' }));
 
@@ -45,17 +47,15 @@ app.use((req, res, next) => {
 
 app.get('/ok', (req, res) => res.sendStatus(200));
 
-app.get('/checkin', checkin.totals);
+app.use('/api/events', EventsRouter);
+app.use('/api/waivers', WaiversRouter);
 
+/* Start Legacy Routes */
+app.get('/checkin', checkin.totals);
 app.get('/waivers', waivers.fetchAll);
 app.post('/waivers', waivers.create);
 app.get('/waivers/check', waivers.check);
-
-app.get('/api/waivers', waiversV2.fetchAll);
-app.post('/api/waivers/count', waiversV2.count);
-app.post('/api/waivers', waiversV2.create);
-app.post('/api/waivers/totals', waiversV2.totals);
-app.get('/api/waivers/check', waiversV2.check);
+/* End Legacy Routes */
 
 app.use((err, req, res, next) => res.status(500).send({ message: "Something when wrong, please try again!" }));
 
