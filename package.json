@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "proxy": "local-ssl-proxy --source 1337 --target 1338"
   },
   "author": "",
   "license": "ISC",
