@@ -39,10 +39,6 @@ app.use((req, res, next) => {
   const body = JSON.stringify(req.body);
 
   console.log(`[${timestamp}] ${method} ${url}`);
-  console.log(`Query: ${query}`);
-  console.log(`Body: ${body}`);
-  console.log('---');
-
   next();
 });
 
