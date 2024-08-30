@@ -11,6 +11,7 @@ const app = express();
 const port = process.env.PORT || config.get('port');
 
 const EventsRouter = require('./lib/v2/events');
+const RegionRouter = require('./lib/v2/region');
 const WaiversRouter = require('./lib/v2/waivers');
 
 app.options('*', cors({ origin: '*' }));
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 app.get('/ok', (req, res) => res.sendStatus(200));
 
 app.use('/api/events', EventsRouter);
+app.use('/api/region', RegionRouter);
 app.use('/api/waivers', WaiversRouter);
 
 /* Start Legacy Routes */

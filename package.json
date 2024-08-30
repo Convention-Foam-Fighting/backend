@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "axios": "^1.7.5",
     "camelcase-keys": "^6.1.1",
     "compression": "^1.7.4",
     "config": "^3.2.4",
@@ -14,8 +15,10 @@
     "helmet": "^3.21.2",
     "jimp": "^0.9.3",
     "knex": "^0.20.6",
+    "moment-timezone": "^0.5.45",
     "multer": "1.4.5-lts.1",
     "nodemailer": "^6.4.2",
+    "nodemon": "^3.1.4",
     "qrcode": "^1.4.4",
     "qrcode-reader": "^1.0.4",
     "smtp-server": "^3.5.0",
@@ -25,6 +28,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "proxy": "local-ssl-proxy --source 1337 --target 1338"
   },
