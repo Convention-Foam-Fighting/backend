@@ -30,13 +30,14 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "proxy": "local-ssl-proxy --source 1337 --target 1338"
+    "proxy": "local-ssl-proxy --hostname 0.0.0.0 --source 1337 --target 1338"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/config": "^3.3.4",
     "@types/express": "^4.17.21",
-    "@types/node": "^22.5.0"
+    "@types/node": "^22.5.0",
+    "local-ssl-proxy": "^2.0.5"
   }
 }

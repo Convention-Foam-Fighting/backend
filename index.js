@@ -74,3 +74,7 @@ if (config.get('certPath')) {
 } else {
   app.listen(port, () => console.log(`Listening on port ${port}`));
 }
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
